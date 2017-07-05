@@ -1,7 +1,8 @@
 FILE=memory-usage-log.txt
+MAX_PROCESSES=11 #amount of processes to show +1 (Header line)
 while true;
     do
-        ps -u jenkins eo pid,%cpu,%mem,args,uname --sort=-%mem >> $FILE;
-        echo "----------" >> $FILE;
-        sleep 1;
+        ps -e eo pid,%cpu,%mem,uname,args --sort=-%mem | head -n $MAX_PROCESSES >> $FILE
+        echo "----------------------------------------------" >> $FILE;
+        sleep 5;
     done
